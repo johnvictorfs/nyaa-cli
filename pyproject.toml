@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "animedownloader"
+version = "0.1.0"
+description = ""
+authors = ["John Victor <johnvictorfs@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+feedparser = "^5.2"
+requests = "^2.22"
+guessit = "^3.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
