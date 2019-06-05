@@ -14,12 +14,18 @@ fh.setLevel(logging.INFO)
 fh.setFormatter(formatter)
 logger.setLevel(logging.INFO)
 logger.addHandler(fh)
+logger.addHandler(logging.StreamHandler())
 
 with open('settings.json') as f:
     settings = json.load(f)
 
 if __name__ == '__main__':
-    feed = feedparser.parse('https://nyaa.si/?page=rss')  # &magnets
+    feed = feedparser.parse('https://nyaa.si/rss?c=1_2')
+    # Arguments:
+    # c=1_0 -> Category 1_0 (Anime - English-translated)
+    # magnets -> Magnets for links
+    # p -> page
+
     user_list = fetch_user_list(settings['Anilist']['username'], settings['Anilist']['token'])
     for item in fetch_watching(user_list):
         episode = item['progress'] + 1
@@ -49,11 +55,9 @@ if __name__ == '__main__':
 
             link, name = search_title(feed, item['media']['title'], episode=episode)
             if link and name:
-                request.urlretrieve(link, f'/home/john/Downloads/{romaji_title} E{episode}.torrent')
-                logger.info(
-                    f"[MAIN] Opening magnet link for anime "
-                    f"'{name if name else item['media']['title']['romaji']}' E{episode}."
-                )
+                path = f'/home/john/Downloads/{romaji_title} E{episode}.torrent'
+                request.urlretrieve(link, path)
+                logger.info(f"[MAIN] Downloading torrent file to {path}")
                 if downloaded_item:
                     downloaded[romaji_title]['episodes'].append(episode)
                     logger.info(f"[MAIN] Added E{episode} to '{romaji_title}'s download entry.")
@@ -67,5 +71,4 @@ if __name__ == '__main__':
 
         with open('downloaded.json', 'w') as f:
             json.dump(downloaded, f)
-
     logger.info('\n')
