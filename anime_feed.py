@@ -1,6 +1,6 @@
 from guessit import guessit
+from fuzzywuzzy import fuzz
 
-from difflib import SequenceMatcher
 import logging
 
 logger = logging.getLogger('anime_downloader')
@@ -15,8 +15,8 @@ def search_title(feed, search: dict, size: int = 720, episode: int = None):
                 if search.get(lang):
                     search_guess = guessit(search.get(lang))
                     lookup = search_guess.get('title')
-                    ratio = SequenceMatcher(None, name, lookup).ratio()
-                    if ratio > 0.75:
+                    ratio = fuzz.token_set_ratio(name, lookup)
+                    if ratio > 75:
                         logger.info(
                             f"[PARSER] Found {ratio * 100:2f}% RSS match for Anime: '{name}' ({lang} title) "
                             f"E{title.get('episode')}"

@@ -57,8 +57,11 @@ def fetch_user_list(username: str, token: str) -> list:
         'Content-Type': 'application/json'
     }
 
-    response = requests.post(url, headers=headers, json={'query': query, 'variables': variables})
-    return response.json().get('data').get('MediaListCollection').get('lists')
+    response = requests.post(url, headers=headers, json={
+                             'query': query, 'variables': variables})
+    if response:
+        return response.json().get('data').get('MediaListCollection').get('lists')
+    return []
 
 
 def fetch_watching(user_list: list) -> list:
