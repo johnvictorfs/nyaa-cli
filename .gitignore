@@ -122,13 +122,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Local settings
-settings.json
-downloaded.json
-
 # Editor files
 .idea/
 .vscode/
-
-# Local
-Anime/

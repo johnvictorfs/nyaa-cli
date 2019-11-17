@@ -1,4 +1,4 @@
-# nyaa-cli
+# nyaacli
 
 A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed and [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)
 
@@ -14,8 +14,7 @@ A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed an
 
 ## Installing
 
-- Will be available on PyPi to be installed with Pip soon
-  - For now dependencies can be installed with [poetry](https://github.com/sdispater/poetry) using `poetry install` and run with `poetry run nyaa.py --help`
+- `python3 -m pip install nyaacli --user`
   - *Note:* python-libtorrent will still need to be downloaded separately as shown below
 
 - This Program depends on python3-libtorrent, which can be installed using Apt with `sudo apt install python3-libtorrent` or can be built from source here: [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)

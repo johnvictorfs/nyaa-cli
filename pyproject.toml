@@ -1,9 +1,12 @@
 [tool.poetry]
-name = "animedownloader"
-version = "0.1.0"
-description = ""
+name = "nyaacli"
+version = "0.1.1"
+description = "A CLI for downloading Anime from https://nyaa.si"
 authors = ["John Victor <johnvictorfs@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+
+keywords = ["CLI", "anime"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -19,7 +22,8 @@ mypy = "^0.740.0"
 flake8 = "^3.7"
 
 [tool.poetry.scripts]
-nyaa-cli = 'nyaa'
+nyaa-cli = 'nyaacli.cli:main'
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

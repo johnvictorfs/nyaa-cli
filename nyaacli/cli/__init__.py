@@ -32,7 +32,6 @@ def main(anime: str, episode: int, output: str):
         download_torrent(torrent_path, result_name, base_path=output)
 
 
-# if __name__ == '__main__':
 try:
     from nyaacli.torrenting import download_torrent
 except ModuleNotFoundError:
