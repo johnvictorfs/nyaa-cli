@@ -8,6 +8,7 @@ from guessit import guessit
 import inquirer
 
 from nyaacli.colors import red, yellow, green, PromptTheme
+from nyaacli.utils import clear_screen
 
 
 def get_file_extension(path: str) -> str:
@@ -149,6 +150,8 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
     ]
 
     answer = inquirer.prompt(questions, theme=PromptTheme())
+
+    clear_screen()
 
     index_choice = answer['entry'] - 1
 
