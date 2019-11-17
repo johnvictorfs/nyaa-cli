@@ -125,3 +125,10 @@ dmypy.json
 # Local settings
 settings.json
 downloaded.json
+
+# Editor files
+.idea/
+.vscode/
+
+# Local
+Anime/
