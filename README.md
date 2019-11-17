@@ -1,4 +1,4 @@
-# nyaacli
+# Nyaa-cli
 
 A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed and [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)
 
@@ -14,7 +14,7 @@ A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed an
 
 ## Installing
 
-- `python3 -m pip install nyaacli --user`
+- `python3 -m pip install nyaa-cli --user`
   - *Note:* python-libtorrent will still need to be downloaded separately as shown below
 
 - This Program depends on python3-libtorrent, which can be installed using Apt with `sudo apt install python3-libtorrent` or can be built from source here: [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)
@@ -23,12 +23,12 @@ A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed an
 
 ## Usage
 
-- **Help:** `nyaa-cli --help`
+- **Help:** `nyaa --help` | `nyaa-cli --help`
 
-- `nyaa-cli "Anime Name" <Episode Number (Optional)> -o <Output Folder (Default: ~/Videos/Anime)>`
+- `nyaa "Anime Name" <Episode Number (Optional)> -o <Output Folder (Default: ~/Videos/Anime)>`
   - **Example:**
     ```bash
     # Downloading Episode 14 of 'Steins;gate' to '~/Anime/Steins;Gate' folder
-    nyaa-cli "Steins;Gate" 14 -o ~/Anime/Steins\;Gate
+    nyaa "Steins;Gate" 14 -o ~/Anime/Steins\;Gate
     ```
   - Then select the entry you want to Download

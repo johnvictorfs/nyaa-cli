@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "nyaacli"
-version = "0.1.1"
+name = "nyaa-cli"
+version = "0.1.2"
 description = "A CLI for downloading Anime from https://nyaa.si"
 authors = ["John Victor <johnvictorfs@gmail.com>"]
 license = "MIT"
@@ -23,6 +23,7 @@ flake8 = "^3.7"
 
 [tool.poetry.scripts]
 nyaa-cli = 'nyaacli.cli:main'
+nyaa = 'nyaacli.cli:main'
 
 [build-system]
 requires = ["poetry>=0.12"]
