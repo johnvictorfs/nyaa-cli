@@ -5,6 +5,7 @@ import time
 import libtorrent
 
 from nyaacli.colors import red, green
+from nyaacli.utils import clear_screen
 
 
 def download_torrent(filename: str, result_filename: str = None, show_progress: bool = True, base_path: str = 'Anime'):
@@ -55,7 +56,9 @@ def download_torrent(filename: str, result_filename: str = None, show_progress: 
 
         os.rename(old_name, new_name)
 
-        print(f'Finished download, at: \'{green(new_name)}\' ')
+        clear_screen()
+
+        print(f'Finished download at: \'{green(new_name)}\' ')
 
 
 if __name__ == '__main__':
