@@ -1,42 +1,31 @@
-from inquirer.themes import Theme
-from blessings import Terminal
-from colorama import init
+from PyInquirer import Token, style_from_dict
+from colorama import init, Fore, Style
 
 init()
 
 
 def red(text: str) -> str:
-    return f'\033[31m{text}\033[0m'
+    return Fore.RED + text + Style.RESET_ALL
 
 
 def green(text: str) -> str:
-    return f'\33[92m{text}\033[0m'
+    return Fore.GREEN + text + Style.RESET_ALL
 
 
 def yellow(text: str) -> str:
-    return f'\33[33m{text}\033[0m'
+    return Fore.YELLOW + text + Style.RESET_ALL
 
 
 def blue(text: str) -> str:
-    return f'\33[34m{text}\033[0m'
+    return Fore.BLUE + text + Style.RESET_ALL
 
 
-class PromptTheme(Theme):
-    def __init__(self):
-        super(PromptTheme, self).__init__()
-
-        term = Terminal()
-
-        self.Question.mark_color = term.yellow
-        self.Question.brackets_color = term.normal
-        self.Question.default_color = term.normal
-        self.Editor.opening_prompt_color = term.bright_black
-        self.Checkbox.selection_color = term.blue
-        self.Checkbox.selection_icon = '❯'
-        self.Checkbox.selected_icon = '◉'
-        self.Checkbox.selected_color = term.yellow + term.bold
-        self.Checkbox.unselected_color = term.normal
-        self.Checkbox.unselected_icon = '◯'
-        self.List.selection_color = term.blue
-        self.List.selection_cursor = '❯'
-        self.List.unselected_color = term.normal
+prompt_style = style_from_dict({
+    Token.Separator: '#6C6C6C',
+    Token.QuestionMark: '#5F819D',
+    Token.Selected: '#48b5b5 bold',
+    Token.Pointer: '#48b5b5 bold',
+    Token.Instruction: '#77a371',
+    Token.Answer: '#48b5b5 bold',
+    Token.Question: '#289c64 bold',
+})

@@ -1,3 +1,4 @@
+import sys
 from urllib import request
 from typing import Optional, List, Tuple
 from dataclasses import dataclass
@@ -5,10 +6,9 @@ import os
 import feedparser
 
 from guessit import guessit
-import inquirer
+from PyInquirer import prompt
 
-from nyaacli.colors import red, yellow, green, PromptTheme
-from nyaacli.utils import clear_screen
+from nyaacli.colors import red, green, prompt_style
 
 
 def get_file_extension(path: str) -> str:
@@ -129,31 +129,38 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
         if entry.seeders:
             seeders = f'{entry.seeders} Seeders'
 
-            if int(entry.seeders) > 40:
-                entry_title += f" - {green(seeders)}"
-            elif 40 > int(entry.seeders) > 20:
-                entry_title += f" - {yellow(seeders)}"
-            else:
-                entry_title += f" - {red(seeders)}"
+            # Colors on options are not working very well with PyInquirer
+            # if int(entry.seeders) > 40:
+            #     entry_title += f" - {green(seeders)}"
+            # elif 40 > int(entry.seeders) > 20:
+            #     entry_title += f" - {yellow(seeders)}"
+            # else:
+            #     entry_title += f" - {red(seeders)}"
+            entry_title += f" - {seeders}"
 
         if entry.size:
             entry_title += f" - {entry.size}"
 
         entry.display_title = entry_title
 
+    choices = [{'name': entry.display_title, 'value': index} for index, entry in enumerate(entries[:5])]
+
     questions = [
-        inquirer.List(
-            'entry',
-            message=green("Select one of the entries below"),
-            choices=[(str(entry.display_title), index) for index, entry in enumerate(entries[:5])],
-        ),
+        {
+            'type': 'list',
+            'choices': choices,
+            'name': 'selection',
+            'message': 'Select one of the entries below',
+        }
     ]
 
-    answer = inquirer.prompt(questions, theme=PromptTheme())
+    answer = prompt(questions, style=prompt_style)
 
-    clear_screen()
+    if not answer:
+        # Cancelled with Ctrl + C
+        sys.exit(0)
 
-    index_choice = answer['entry'] - 1
+    index_choice = answer['selection'] - 1
 
     entry_choice = entries[index_choice]
 
@@ -161,7 +168,7 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
 
     torrent_path = f'/tmp/{final_path}.torrent'
 
-    print(f"{green('[Downloading]')} '{torrent_path}'")
+    print(f"{green('[Downloading Torrent File]')} '{torrent_path}'")
 
     request.urlretrieve(entry_choice.link, torrent_path)
 
