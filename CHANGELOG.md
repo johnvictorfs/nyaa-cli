@@ -2,6 +2,14 @@
 
 ---
 
+## 0.1.4
+
+- Add Windows Support [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #10)
+- Fix Entries in list re-appearing [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #7)
+- Can now exit gracefully from List of entries with `Ctrl` + `C` [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #4)
+
+---
+
 ## 0.1.3
 
 - Terminal now clears after anime entry selection and after Video download ends [(d9b0423)](https://github.com/johnvictorfs/nyaa-cli/commit/d9b04232ee4ccfd9292cb46722e5403f1d0b49e0)
