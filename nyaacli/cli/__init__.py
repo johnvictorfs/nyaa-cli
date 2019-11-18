@@ -6,6 +6,9 @@ import click
 
 from nyaacli.nyaa_search import search_torrent
 from nyaacli.colors import red, green
+from colorama import init
+
+init()
 
 
 @click.command()
