@@ -31,10 +31,11 @@ def download_torrent(filename: str, result_filename: str = None, show_progress: 
             progress = green(f"{status.progress * 100:.2f}%")
             download_rate = green(f"{status.download_rate / 1000:.1f} kB/s")
 
-            sys.stdout.write(
-                f'\r◉ {green(str(status.state).title())} - {progress} '
+            print(
+                f'◉ {green(str(status.state).title())} - {progress} '
                 f'(Download: {download_rate} - Upload: {status.upload_rate / 1000:.1f} kB/s - '
-                f'Peers: {status.num_peers}) '
+                f'Peers: {status.num_peers}) ',
+                end='\r'
             )
 
             alerts = session.pop_alerts()
@@ -42,7 +43,7 @@ def download_torrent(filename: str, result_filename: str = None, show_progress: 
             alert: libtorrent.alert
             for alert in alerts:
                 if alert.category() & libtorrent.alert.category_t.error_notification:
-                    sys.stdout.write(f"\r{red('[Alert]')} {alert} ")
+                    sys.stdout.write(f"{red('[Alert]')} {alert} \r")
 
             sys.stdout.flush()
 

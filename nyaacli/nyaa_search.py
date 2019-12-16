@@ -2,6 +2,8 @@ import sys
 from urllib import request
 from typing import Optional, List, Tuple
 from dataclasses import dataclass
+from datetime import datetime
+from time import mktime
 import os
 import feedparser
 
@@ -45,6 +47,7 @@ class Entry:
     seeders: Optional[str]
     size: Optional[str]
     episode_title: Optional[str]
+    date: datetime
 
 
 def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False) -> Optional[Tuple[str, str]]:
@@ -58,12 +61,19 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
     if episode:
         search_query += f" {episode}".replace(' ', '%20')
 
+    search_url = f"https://nyaa.si/rss?c=1_2&q={search_query}&s=seeders&o=desc"
+
     # Parse Nyaa.si rss feed search
-    feed: feedparser.FeedParserDict = feedparser.parse(f"https://nyaa.si/rss?c=1_2&q={search_query}&s=seeders&o=desc")
+    feed: feedparser.FeedParserDict = feedparser.parse(search_url)
+
+    if not feed.entries and feed.bozo_exception:
+        # Malformatted feed
+        print(red(f"[Error] {str(feed.bozo_exception)}"))
+        sys.exit(1)
 
     entries: List[Entry] = []
 
-    for entry in feed['entries']:
+    for entry in feed.entries:
         title = guessit(entry['title'])
 
         if not title.get('screen_size'):
@@ -77,7 +87,7 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
         # Screen size needs to be higher than 480p
         good_size = int(title.get('screen_size').replace('p', '')) > 480
 
-        if title.get('episode') == episode and title.get('type') == 'episode' and good_size:
+        if (title.get('episode') == episode or not episode) and title.get('type') == 'episode' and good_size:
             entries.append(Entry(
                 link=entry['link'],
                 size=entry['nyaa_size'],
@@ -93,7 +103,8 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
                 other=title.get('other'),
                 release_group=title.get('release_group'),
                 screen_size=title.get('screen_size'),
-                alternative_title=title.get('alternative_title')
+                alternative_title=title.get('alternative_title'),
+                date=datetime.fromtimestamp(mktime(entry.get('published_parsed')))
             ))
 
     if not entries:
@@ -140,6 +151,9 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
 
         if entry.size:
             entry_title += f" - {entry.size}"
+
+        if entry.date:
+            entry_title += f" ({entry.date.strftime('%d/%m/%y')})"
 
         entry.display_title = entry_title
 

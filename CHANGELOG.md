@@ -2,6 +2,13 @@
 
 ---
 
+## 0.1.5
+
+- Fix issue where selecting no Episodes when searching barely got any selections
+- Add published date next to Episode selection entries
+
+---
+
 ## 0.1.4
 
 - Add Windows Support [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #10)

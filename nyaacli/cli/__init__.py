@@ -25,7 +25,7 @@ def main(anime: str, episode: int, output: str):
 
     \b
     Example:
-        \33[92mnyaa \33[36m"Kimetsu no Yaiba" \33[33m19 \33[34m-o "My/Animes/Folder/Kimetsu_No_Yaiba/\033[0m
+        \33[92mnyaa \33[36m"Kimetsu no Yaiba" \33[33m19 \33[34m-o /home/user/My/Animes/Folder/Kimetsu_No_Yaiba/\033[0m
     """
     torrent_search = search_torrent(anime, episode)
 
