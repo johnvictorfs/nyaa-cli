@@ -4,37 +4,37 @@
 
 ## 0.1.5
 
-- Fix issue where selecting no Episodes when searching barely got any selections
-- Add published date next to Episode selection entries
+- Fix issue where selecting no Episodes when searching barely got any selections [`(697978b)`](https://github.com/johnvictorfs/nyaa-cli/commit/697978bd40d9524f74711d97bee06a8387d99411)
+- Add published date next to Episode selection entries [`(697978b)`](https://github.com/johnvictorfs/nyaa-cli/commit/697978bd40d9524f74711d97bee06a8387d99411)
 
 ---
 
 ## 0.1.4
 
-- Add Windows Support [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #10)
-- Fix Entries in list re-appearing [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #7)
-- Can now exit gracefully from List of entries with `Ctrl` + `C` [(b609d2f)](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #4)
+- Add Windows Support [`(b609d2f)`](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #10)
+- Fix Entries in list re-appearing [`(b609d2f)`](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #7)
+- Can now exit gracefully from List of entries with <kbd>Ctrl</kbd> + <kbd>C</kbd> [`(b609d2f)`](https://github.com/johnvictorfs/nyaa-cli/commit/b609d2f05c0b2bb1a42b9654f380d38ab4219df6) (Closes Issue #4)
 
 ---
 
 ## 0.1.3
 
-- Terminal now clears after anime entry selection and after Video download ends [(d9b0423)](https://github.com/johnvictorfs/nyaa-cli/commit/d9b04232ee4ccfd9292cb46722e5403f1d0b49e0)
+- Terminal now clears after anime entry selection and after Video download ends [`(d9b0423)`](https://github.com/johnvictorfs/nyaa-cli/commit/d9b04232ee4ccfd9292cb46722e5403f1d0b49e0)
 
 ---
 
 ## 0.1.2
 
-- Added the `nyaa` alias to the `nyaa-cli` command [(2ca861b)](https://github.com/johnvictorfs/nyaa-cli/commit/2ca861b6dcdffaa0cdf1556c2898e7a4a95c2bd6)
+- Added the `nyaa` alias to the `nyaa-cli` command [`(2ca861b)`](https://github.com/johnvictorfs/nyaa-cli/commit/2ca861b6dcdffaa0cdf1556c2898e7a4a95c2bd6)
 
 ---
 
 ## 0.1.1
 
-- Added the `nyaa-cli` command and uploaded the CLI to PyPi [(7dae039)](https://github.com/johnvictorfs/nyaa-cli/commit/7dae0396db018250683d40f8ce3343b4da8f2c23)
+- Added the `nyaa-cli` command and uploaded the CLI to PyPi [`(7dae039)`](https://github.com/johnvictorfs/nyaa-cli/commit/7dae0396db018250683d40f8ce3343b4da8f2c23)
 
 ---
 
 ## 0.1.0
 
-- Added CLI Interface for downloading anime from nyaa.si [(7431796)](https://github.com/johnvictorfs/nyaa-cli/commit/7431796d56b0c46e3d3b113d34bcb1847b952bf5)
+- Added CLI Interface for downloading anime from nyaa.si [`(7431796)`](https://github.com/johnvictorfs/nyaa-cli/commit/7431796d56b0c46e3d3b113d34bcb1847b952bf5)
