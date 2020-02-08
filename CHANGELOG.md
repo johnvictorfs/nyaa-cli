@@ -2,6 +2,14 @@
 
 ---
 
+## 0.1.6
+
+- Update PyInquirer to forked version to fix issue with searching for Anime with broken 'regex' package [`(4346468)`](https://github.com/johnvictorfs/nyaa-cli/commit/434646855683b69f5def77b9f03bc75819aa9d89) (Closes Issue #20)
+
+- Switch PyInquirer entirely with [questionary](https://github.com/tmbo/questionary)
+
+---
+
 ## 0.1.5
 
 - Fix issue where selecting no Episodes when searching barely got any selections [`(697978b)`](https://github.com/johnvictorfs/nyaa-cli/commit/697978bd40d9524f74711d97bee06a8387d99411)

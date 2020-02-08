@@ -1,7 +1,7 @@
-from PyInquirer import prompt
+from questionary import prompt
 from guessit import guessit
 
-from nyaacli.colors import red, green, prompt_style
+from nyaacli.colors import red, yellow, green, prompt_style
 
 from urllib import request
 from typing import Optional, List, Tuple
@@ -141,14 +141,6 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
 
         if entry.seeders:
             seeders = f'{entry.seeders} Seeders'
-
-            # Colors on options are not working very well with PyInquirer
-            # if int(entry.seeders) > 40:
-            #     entry_title += f" - {green(seeders)}"
-            # elif 40 > int(entry.seeders) > 20:
-            #     entry_title += f" - {yellow(seeders)}"
-            # else:
-            #     entry_title += f" - {red(seeders)}"
             entry_title += f' - {seeders}'
 
         if entry.size:

@@ -1,4 +1,4 @@
-from PyInquirer import Token, style_from_dict
+from prompt_toolkit import styles
 from colorama import init, Fore, Style
 
 init()
@@ -20,12 +20,15 @@ def blue(text: str) -> str:
     return Fore.BLUE + text + Style.RESET_ALL
 
 
-prompt_style = style_from_dict({
-    Token.Separator: '#6C6C6C',
-    Token.QuestionMark: '#5F819D',
-    Token.Selected: '#48b5b5 bold',
-    Token.Pointer: '#48b5b5 bold',
-    Token.Instruction: '#77a371',
-    Token.Answer: '#48b5b5 bold',
-    Token.Question: '#289c64 bold',
-})
+prompt_style = styles.Style([
+    ('qmark', 'fg:#5F819D bold'),
+    ('question', 'fg:#289c64 bold'),
+    ('answer', 'fg:#48b5b5 bold'),
+    ('pointer', 'fg:#48b5b5 bold'),
+    ('highlighted', 'fg:#07d1e8'),
+    ('selected', 'fg:#48b5b5 bold'),
+    ('separator', 'fg:#6C6C6C'),
+    ('instruction', 'fg:#77a371'),
+    ('text', ''),
+    ('disabled', 'fg:#858585 italic')
+])
