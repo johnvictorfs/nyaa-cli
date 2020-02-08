@@ -4,9 +4,9 @@
 
 ## 0.1.6
 
-- Update PyInquirer to forked version to fix issue with searching for Anime with broken 'regex' package [`(4346468)`](https://github.com/johnvictorfs/nyaa-cli/commit/434646855683b69f5def77b9f03bc75819aa9d89) (Closes Issue #20)
+- Update PyInquirer to forked version to fix issue with searching for Anime with broken 'regex' package [`(4346468)`](https://github.com/johnvictorfs/nyaa-cli/commit/434646855683b69f5def77b9f03bc75819aa9d89)
 
-- Switch PyInquirer entirely with [questionary](https://github.com/tmbo/questionary)
+- Switch PyInquirer entirely with [questionary](https://github.com/tmbo/questionary) [`(f388427)`](https://github.com/johnvictorfs/nyaa-cli/commit/f388427e77974892696c62812478288a4690f5a6) (Closes Issue #20)
 
 ---
 

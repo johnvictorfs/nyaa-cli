@@ -1,7 +1,7 @@
 from questionary import prompt
 from guessit import guessit
 
-from nyaacli.colors import red, yellow, green, prompt_style
+from nyaacli.colors import red, green, prompt_style
 
 from urllib import request
 from typing import Optional, List, Tuple
