@@ -1,16 +1,18 @@
-import sys
+from PyInquirer import prompt
+from guessit import guessit
+
+from nyaacli.colors import red, green, prompt_style
+
 from urllib import request
 from typing import Optional, List, Tuple
 from dataclasses import dataclass
 from datetime import datetime
 from time import mktime
-import os
 import feedparser
+import sys
+import os
 
-from guessit import guessit
-from PyInquirer import prompt
-
-from nyaacli.colors import red, green, prompt_style
+os.environ['REGEX_DISABLED'] = '1'
 
 
 def get_file_extension(path: str) -> str:
@@ -57,11 +59,11 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
     https://github.com/nyaadevs/nyaa/blob/a38e5d5b53805ecb1d94853d849826f948f07aad/nyaa/views/main.py#L65
     """
 
-    search_query = f"{search}".replace(' ', '%20')
+    search_query = f'{search}'.strip().replace(' ', '%20')
     if episode:
-        search_query += f" {episode}".replace(' ', '%20')
+        search_query += f' {episode}'.strip().replace(' ', '%20')
 
-    search_url = f"https://nyaa.si/rss?c=1_2&q={search_query}&s=seeders&o=desc"
+    search_url = f'https://nyaa.si/rss?c=1_2&q={search_query}&s=seeders&o=desc'
 
     # Parse Nyaa.si rss feed search
     feed: feedparser.FeedParserDict = feedparser.parse(search_url)
@@ -116,26 +118,26 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
         entry.full_title = entry.title
 
         if entry.alternative_title:
-            entry_title += f" - {entry.alternative_title}"
-            entry.full_title += f" - {entry.alternative_title}"
+            entry_title += f' - {entry.alternative_title}'
+            entry.full_title += f' - {entry.alternative_title}'
 
         if entry.episode or entry.episode_title:
             if entry.episode:
-                entry_title += f" - Episode {entry.episode}"
-                entry.full_title += f" - Episode {entry.episode}"
+                entry_title += f' - Episode {entry.episode}'
+                entry.full_title += f' - Episode {entry.episode}'
             else:
-                entry_title += f" - Episode {entry.episode_title}"
-                entry.full_title += f" - Episode {entry.episode_title}"
+                entry_title += f' - Episode {entry.episode_title}'
+                entry.full_title += f' - Episode {entry.episode_title}'
 
         if entry.season:
-            entry_title += f" - Season {entry.season}"
-            entry.full_title += f" - Season {entry.season}"
+            entry_title += f' - Season {entry.season}'
+            entry.full_title += f' - Season {entry.season}'
 
         if entry.release_group:
-            entry_title += f" ({entry.release_group})"
+            entry_title += f' ({entry.release_group})'
 
         if entry.screen_size:
-            entry_title += f" {entry.screen_size}"
+            entry_title += f' {entry.screen_size}'
 
         if entry.seeders:
             seeders = f'{entry.seeders} Seeders'
@@ -147,10 +149,10 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
             #     entry_title += f" - {yellow(seeders)}"
             # else:
             #     entry_title += f" - {red(seeders)}"
-            entry_title += f" - {seeders}"
+            entry_title += f' - {seeders}'
 
         if entry.size:
-            entry_title += f" - {entry.size}"
+            entry_title += f' - {entry.size}'
 
         if entry.date:
             entry_title += f" ({entry.date.strftime('%d/%m/%y')})"

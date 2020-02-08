@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nyaacli"
-version = "0.1.5"
+version = "0.1.6"
 description = "A CLI for downloading Anime from https://nyaa.si"
 authors = ["John Victor <johnvictorfs@gmail.com>"]
 license = "MIT"
@@ -22,7 +22,7 @@ guessit = "^3.0"
 click = "^7.0"
 colorama = "^0.4.1"
 dataclasses = { version = "^0.7", python = "~3.6" }
-PyInquirer = "^1.0"
+PyInquirer = { git = "https://github.com/johnvictorfs/PyInquirer.git", branch = "master" }
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.4"
@@ -39,4 +39,3 @@ max-line-length = 140
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
-
