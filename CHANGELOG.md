@@ -4,7 +4,7 @@
 
 ## 0.1.7
 
-- Fix issue when searching for specific episode numbers (https://github.com/johnvictorfs/nyaa-cli/commit/f1ac2e983fdb72c7a608d6c20d149ac1cb94dfa0)
+- Fix issue when searching for specific episode numbers [`(f1ac2e9)`](https://github.com/johnvictorfs/nyaa-cli/commit/f1ac2e983fdb72c7a608d6c20d149ac1cb94dfa0)
 
 ---
 
