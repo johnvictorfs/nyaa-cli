@@ -16,7 +16,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "~3.7"
+python = "^3.7"
 feedparser = "~5.2"
 guessit = "~3.0"
 click = "~7.0"
@@ -32,9 +32,6 @@ flake8 = "^3.7"
 [tool.poetry.scripts]
 nyaa-cli = 'nyaacli.cli:main'
 nyaa = 'nyaacli.cli:main'
-
-[tool.flake8]
-max-line-length = 140
 
 [build-system]
 requires = ["poetry>=0.12"]
