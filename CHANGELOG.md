@@ -2,6 +2,12 @@
 
 ---
 
+## 0.1.7
+
+- Fix issue when searching for specific episode numbers (https://github.com/johnvictorfs/nyaa-cli/commit/f1ac2e983fdb72c7a608d6c20d149ac1cb94dfa0)
+
+---
+
 ## 0.1.6
 
 - Update PyInquirer to forked version to fix issue with searching for Anime with broken 'regex' package [`(4346468)`](https://github.com/johnvictorfs/nyaa-cli/commit/434646855683b69f5def77b9f03bc75819aa9d89)
