@@ -9,10 +9,13 @@ from dataclasses import dataclass
 from datetime import datetime
 from time import mktime
 import feedparser
+import logging
 import sys
 import os
 
 os.environ['REGEX_DISABLED'] = '1'
+
+logger = logging.getLogger('nyaa')
 
 
 def get_file_extension(path: str) -> str:
@@ -51,6 +54,9 @@ class Entry:
     episode_title: Optional[str]
     date: datetime
 
+    def __str__(self):
+        return f'Entry(title={repr(self.title)}, episode={repr(self.episode)})'
+
 
 def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False) -> Optional[Tuple[str, str]]:
     """
@@ -61,12 +67,15 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
 
     search_query = f'{search}'.strip().replace(' ', '%20')
     if episode:
-        search_query += f' {episode}'.strip().replace(' ', '%20')
+        search_query += f' {episode}'.replace(' ', '%20')
+
+    logger.debug(f'Searching nyaa for query: \'{search_query}\'')
 
     search_url = f'https://nyaa.si/rss?c=1_2&q={search_query}&s=seeders&o=desc'
 
     # Parse Nyaa.si rss feed search
     feed: feedparser.FeedParserDict = feedparser.parse(search_url)
+    logger.debug(f'Getting feed parse from: \'{search_url}\'')
 
     if not feed.entries and feed.bozo_exception:
         # Malformatted feed
@@ -90,7 +99,7 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
         good_size = int(title.get('screen_size').replace('p', '')) > 480
 
         if (title.get('episode') == episode or not episode) and title.get('type') == 'episode' and good_size:
-            entries.append(Entry(
+            entry = Entry(
                 link=entry['link'],
                 size=entry['nyaa_size'],
                 original_title=entry['title'],
@@ -107,7 +116,9 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
                 screen_size=title.get('screen_size'),
                 alternative_title=title.get('alternative_title'),
                 date=datetime.fromtimestamp(mktime(entry.get('published_parsed')))
-            ))
+            )
+            logger.debug(f'Added entry: {entry}')
+            entries.append(entry)
 
     if not entries:
         print(red(f'No results found for search: \'{search_query.replace("%20", " ")}\''))
@@ -162,6 +173,8 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
         }
     ]
 
+    logger.debug(f'Download choices: {choices}')
+
     answer = prompt(questions, style=prompt_style)
 
     if not answer:
@@ -172,12 +185,16 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
 
     entry_choice = entries[index_choice]
 
+    logger.debug(f'Selected entry at index {index_choice}: {entry_choice}')
+
     final_path = entry_choice.full_title
 
     torrent_path = f'/tmp/{final_path}.torrent'
+    logger.debug(f'Downloading torrent file to \'{torrent_path}\'')
 
     print(f"{green('[Downloading Torrent File]')} '{torrent_path}'")
 
     request.urlretrieve(entry_choice.link, torrent_path)
+    logger.debug('Downloaded torrent file')
 
     return torrent_path, final_path + entry_choice.extension
