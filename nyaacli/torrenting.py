@@ -1,20 +1,26 @@
 import os
 import sys
 import time
+import logging
 
 import libtorrent
 
 from nyaacli.colors import red, green
 from nyaacli.utils import clear_screen
 
+logger = logging.getLogger('nyaa')
+
 
 def download_torrent(filename: str, result_filename: str = None, show_progress: bool = True, base_path: str = 'Anime'):
     session = libtorrent.session({'listen_interfaces': '0.0.0.0:6881'})
+    logger.debug('Started libtorrent session')
 
     base_path = os.path.expanduser(base_path)
+    logger.debug(f'Downloading output to: \'{base_path}\'')
 
     info = libtorrent.torrent_info(filename)
 
+    logger.debug('Started downloading torrent')
     handle: libtorrent.torrent_handle = session.add_torrent({
         'ti': info,
         'save_path': base_path
@@ -59,6 +65,7 @@ def download_torrent(filename: str, result_filename: str = None, show_progress: 
 
         clear_screen()
 
+        logger.debug('Finished torrent download')
         print(f'Finished download at: \'{green(new_name)}\' ')
 
 
