@@ -16,11 +16,12 @@ init()
 @click.command()
 @click.argument('anime')
 @click.argument('episode', type=int, default=None, required=False)
-@click.option('--debug/--no-debug', default=False, help=green('Debug Mode'))
 @click.option('--output', '-o', default='~/Videos/Anime', help=green('Output Folder'), type=click.Path(), show_default=True)
-def main(anime: str, episode: int, output: str, debug: bool = False):
+@click.option('--debug/--no-debug', default=False, help=green('Debug Mode'))
+@click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True)
+def main(anime: str, episode: int, output: str, debug: bool = False, number: int = 10):
     """
-    Search for an Anime on https://nyaa.si and downloads it
+    Search for Anime on https://nyaa.si and downloads it
 
     \b
     Usage:
@@ -45,7 +46,7 @@ def main(anime: str, episode: int, output: str, debug: bool = False):
         logger.setLevel(logging.DEBUG)
         ch.setLevel(logging.DEBUG)
 
-    torrent_search = search_torrent(anime, episode)
+    torrent_search = search_torrent(anime, episode, number=number)
 
     if torrent_search:
         torrent_path, result_name = torrent_search

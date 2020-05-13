@@ -58,7 +58,7 @@ class Entry:
         return f'Entry(title={repr(self.title)}, episode={repr(self.episode)})'
 
 
-def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False) -> Optional[Tuple[str, str]]:
+def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False, number: int = 10) -> Optional[Tuple[str, str]]:
     """
     Results a tuple with (Path to .torrent file, Result name of video file)
     Nyaa.si rss search flags
@@ -124,7 +124,7 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
         print(red(f'No results found for search: \'{search_query.replace("%20", " ")}\''))
         return None
 
-    for entry in entries[:5]:
+    for entry in entries[:number]:
         entry_title = entry.title
         entry.full_title = entry.title
 
@@ -162,7 +162,7 @@ def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False
 
         entry.display_title = entry_title
 
-    choices = [{'name': entry.display_title, 'value': index} for index, entry in enumerate(entries[:5])]
+    choices = [{'name': entry.display_title, 'value': index} for index, entry in enumerate(entries[:number])]
 
     questions = [
         {
