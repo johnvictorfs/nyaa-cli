@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nyaacli"
-version = "0.1.7"
+version = "0.1.8"
 description = "A CLI for downloading Anime from https://nyaa.si"
 authors = ["John Victor <johnvictorfs@gmail.com>"]
 license = "MIT"
@@ -12,11 +12,12 @@ keywords = ["CLI", "anime"]
 classifiers = [
     "Environment :: Console",
     "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7"
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8"
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.6"
 feedparser = "~5.2"
 guessit = "~3.0"
 click = "~7.0"

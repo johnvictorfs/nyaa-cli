@@ -24,7 +24,7 @@ A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed an
 - `python3 -m pip install nyaacli --user`
   - *Note:* python-libtorrent will still need to be downloaded separately as shown below
 
-- This Program depends on python3-libtorrent, which can be installed using Apt with `sudo apt install python3-libtorrent` or can be built from source here: [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)
+- This Program depends on libtorrent together with its Python API, which can be installed using apt on debian-based linux distros with `sudo apt install python3-libtorrent` (`libtorrent-rasterbar` with pacman for Arch-based distros) or can be built from source here: [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)
 
 ---
 
