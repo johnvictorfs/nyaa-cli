@@ -2,6 +2,7 @@
 
 import logging
 import sys
+from typing import List
 
 from nyaacli.nyaa_search import search_torrent
 from nyaacli.colors import red, green
@@ -13,12 +14,29 @@ from colorama import init
 init()
 
 
+def entries_autocomplete(ctx, args: List[str], incomplete: str):
+    """
+    Auto-complete choices for --number / -n argument
+    """
+
+    text = 'Selection Entries'
+
+    entries = [
+        ('5', f'5 {text}'),
+        ('10', f'10 {text}'),
+        ('15', f'15 {text}'),
+        ('20', f'20 {text}')
+    ]
+
+    return [c for c in entries if incomplete in c[0]]
+
+
 @click.command()
 @click.argument('anime')
 @click.argument('episode', type=int, default=None, required=False)
 @click.option('--output', '-o', default='~/Videos/Anime', help=green('Output Folder'), type=click.Path(), show_default=True)
 @click.option('--debug/--no-debug', default=False, help=green('Debug Mode'))
-@click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True)
+@click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True, autocompletion=entries_autocomplete)
 def main(anime: str, episode: int, output: str, debug: bool = False, number: int = 10):
     """
     Search for Anime on https://nyaa.si and downloads it
@@ -57,16 +75,14 @@ def main(anime: str, episode: int, output: str, debug: bool = False, number: int
 try:
     from nyaacli.torrenting import download_torrent
 except ModuleNotFoundError:
-    print(red("You need to have the 'python3-libtorrent' library installed to user nyaa-cli.\n"))
+    print(red("You need to have the 'libtorrent' library (with the Python API) installed to user nyaa-cli.\n"))
 
-    aur_url = 'https://aur.archlinux.org/packages/libtorrent-rasterbar-git'
+    print('- Install with apt:', green('sudo apt install python3-libtorrent'))
+    print('- Install with pacman:', green('sudo pacman -S libtorrent-rasterbar'))
 
-    print('- Install with Apt:', green('sudo apt install python3-libtorrent'))
-    print('- Install from the AUR:', green(aur_url))
+    libtorrent_url = green("https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst")
 
-    libtorrent_url = "https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst"
-
-    print(f"\nOtherwise, look into how you can build it here: {libtorrent_url}")
+    print(f"\nOtherwise, look into how you can build it from source here: {libtorrent_url}")
     sys.exit(1)
 
 main()
