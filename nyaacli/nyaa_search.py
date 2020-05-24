@@ -3,8 +3,8 @@ from guessit import guessit
 
 from nyaacli.colors import red, green, prompt_style
 
-from urllib import request
-from typing import Optional, List, Tuple
+from urllib import parse, request
+from typing import Optional, List, Tuple, Dict
 from dataclasses import dataclass
 from datetime import datetime
 from time import mktime
@@ -58,28 +58,43 @@ class Entry:
         return f'Entry(title={repr(self.title)}, episode={repr(self.episode)})'
 
 
-def search_torrent(search: str, episode: Optional[int] = None, dub: bool = False, number: int = 10) -> Optional[Tuple[str, str]]:
+def search_torrent(
+    search: str,
+    episode: Optional[int] = None,
+    dub: bool = False,
+    number: int = 10,
+    trusted_only: bool = False
+) -> Optional[Tuple[str, str]]:
     """
     Results a tuple with (Path to .torrent file, Result name of video file)
     Nyaa.si rss search flags
     https://github.com/nyaadevs/nyaa/blob/a38e5d5b53805ecb1d94853d849826f948f07aad/nyaa/views/main.py#L65
     """
 
-    search_query = f'{search}'.strip().replace(' ', '%20')
+    search_query = f'{search}'.strip()
     if episode:
-        search_query += f' {episode}'.replace(' ', '%20')
+        search_query += f' {episode}'
 
     logger.debug(f'Searching nyaa for query: \'{search_query}\'')
 
-    search_url = f'https://nyaa.si/rss?c=1_2&q={search_query}&s=seeders&o=desc'
+    url_arguments: Dict[str, str] = {
+        'c': '1_2',  # Language (English)
+        'q': search_query,  # Search Query
+        's': 'seeders',  # Sort by seeders
+        'o': 'desc',  # Sort order
+    }
+
+    if trusted_only:
+        url_arguments['f'] = '2'  # Trusted uploaders only
+
+    search_url = 'https://nyaa.si/rss?' + parse.urlencode(url_arguments)
 
     # Parse Nyaa.si rss feed search
     feed: feedparser.FeedParserDict = feedparser.parse(search_url)
     logger.debug(f'Getting feed parse from: \'{search_url}\'')
 
-    if not feed.entries and feed.bozo_exception:
-        # Malformatted feed
-        print(red(f"[Error] {str(feed.bozo_exception)}"))
+    if not feed.entries:
+        print(red('[Error] No entries found for search'))
         sys.exit(1)
 
     entries: List[Entry] = []

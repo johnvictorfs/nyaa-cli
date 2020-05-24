@@ -36,8 +36,9 @@ def entries_autocomplete(ctx, args: List[str], incomplete: str):
 @click.argument('episode', type=int, default=None, required=False)
 @click.option('--output', '-o', default='~/Videos/Anime', help=green('Output Folder'), type=click.Path(), show_default=True)
 @click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True, autocompletion=entries_autocomplete)
-@click.option('--debug/--no-debug', default=False, help=green('Debug Mode'))
-def main(anime: str, episode: int, output: str, debug: bool = False, number: int = 10):
+@click.option('--trusted', '-t', default=False, help=green('Only search trusted uploads'), is_flag=True)
+@click.option('--debug', '-d', default=False, help=green('Debug Mode'), is_flag=True)
+def main(anime: str, episode: int, output: str, debug: bool = False, trusted: bool = False, number: int = 10):
     """
     Search for Anime on https://nyaa.si and downloads it
 
@@ -64,7 +65,7 @@ def main(anime: str, episode: int, output: str, debug: bool = False, number: int
         logger.setLevel(logging.DEBUG)
         ch.setLevel(logging.DEBUG)
 
-    torrent_search = search_torrent(anime, episode, number=number)
+    torrent_search = search_torrent(anime, episode, number=number, trusted_only=trusted)
 
     if torrent_search:
         torrent_path, result_name = torrent_search

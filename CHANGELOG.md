@@ -2,9 +2,15 @@
 
 ---
 
-## 0.1.9
+## 0.2.0
 
 - Only show torrent alert messages in debug mode (`--debug`) (Closes Issue [`#25`](https://github.com/johnvictorfs/nyaa-cli/issues/25))
+
+- Add argument to search for only trusted torrents `-t` (`--trusted`) (Closes Issue [`#26`](https://github.com/johnvictorfs/nyaa-cli/issues/26))
+
+- Add argument alias for `--debug` (`-d`)
+
+- Removed off-switch for `--debug` flag (used to be `--no-debug`). It's already off by default so it was an useless argument
 
 ---
 
