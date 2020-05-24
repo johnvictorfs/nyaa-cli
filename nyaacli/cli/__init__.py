@@ -35,15 +35,15 @@ def entries_autocomplete(ctx, args: List[str], incomplete: str):
 @click.argument('anime')
 @click.argument('episode', type=int, default=None, required=False)
 @click.option('--output', '-o', default='~/Videos/Anime', help=green('Output Folder'), type=click.Path(), show_default=True)
-@click.option('--debug/--no-debug', default=False, help=green('Debug Mode'))
 @click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True, autocompletion=entries_autocomplete)
+@click.option('--debug/--no-debug', default=False, help=green('Debug Mode'))
 def main(anime: str, episode: int, output: str, debug: bool = False, number: int = 10):
     """
     Search for Anime on https://nyaa.si and downloads it
 
     \b
     Usage:
-        \33[92mnyaa \33[36m"Anime Name" \33[33m<Episode Number (Optional)> \33[34m-o <Output Folder (Default = '~/Videos/Anime')>\033[0m
+        \33[92mnyaa \33[36m"Anime Name" \33[33m<Episode Number (Optional)> \33[34m-o <Output Folder (Default = "~/Videos/Anime")>\033[0m
 
     \b
     Example:
