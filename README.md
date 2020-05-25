@@ -32,10 +32,29 @@ A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed an
 
 - **Help:** `nyaa --help` or `nyaa-cli --help`
 
-- `nyaa "Anime Name" <Episode Number (Optional)> -o <Output Folder (Default: ~/Videos/Anime)>`
-  - **Example:**
+```bash
+Usage: nyaa [OPTIONS] ANIME [EPISODE]
+
+  Search for Anime on https://nyaa.si and downloads it
+
+  Usage:
+      nyaa "Anime Name" <Episode Number (Optional)> -o <Output Folder (Default = "~/Videos/Anime")>
+
+  Example:
+      nyaa "Kimetsu no Yaiba" 19 -o /home/user/My/Animes/Folder/Kimetsu_No_Yaiba/
+
+Options:
+  -o, --output PATH     Output Folder  [default: ~/Videos/Anime]
+  -n, --number INTEGER  Number of entries  [default: 10]
+  -s, --sort-by TEXT    Sort by  [default: seeders]
+  -t, --trusted         Only search trusted uploads
+  -d, --debug           Debug Mode
+  --help                Show this message and exit.
+```
+
+- **Example:**
     ```bash
     # Downloading Episode 14 of 'Steins;gate' to '~/Anime/Steins;Gate'
     nyaa "Steins;Gate" 14 -o ~/Anime/Steins\;Gate
     ```
-  - Then select the entry you want to Download
+
