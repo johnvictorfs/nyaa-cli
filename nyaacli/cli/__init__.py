@@ -23,9 +23,24 @@ def entries_autocomplete(ctx, args: List[str], incomplete: str):
 
     entries = [
         ('5', f'5 {text}'),
-        ('10', f'10 {text}'),
+        ('10', f'10 {text} (default)'),
         ('15', f'15 {text}'),
         ('20', f'20 {text}')
+    ]
+
+    return [c for c in entries if incomplete in c[0]]
+
+
+def sort_mode_autocomplete(ctx, args: List[str], incomplete: str):
+    """
+    Auto-complete choices for --sort-by / -s argument
+    """
+
+    entries = [
+        ('seeders', 'Sort by number of torrent seeders (default)'),
+        ('date', 'Sort by upload date'),
+        ('size', 'Sort by file size'),
+        ('comments', 'Sort by number of comments')
     ]
 
     return [c for c in entries if incomplete in c[0]]
@@ -36,9 +51,18 @@ def entries_autocomplete(ctx, args: List[str], incomplete: str):
 @click.argument('episode', type=int, default=None, required=False)
 @click.option('--output', '-o', default='~/Videos/Anime', help=green('Output Folder'), type=click.Path(), show_default=True)
 @click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True, autocompletion=entries_autocomplete)
+@click.option('--sort-by', '-s', default='seeders', help=green('Sort by'), show_default=True, autocompletion=sort_mode_autocomplete)
 @click.option('--trusted', '-t', default=False, help=green('Only search trusted uploads'), is_flag=True)
 @click.option('--debug', '-d', default=False, help=green('Debug Mode'), is_flag=True)
-def main(anime: str, episode: int, output: str, debug: bool = False, trusted: bool = False, number: int = 10):
+def main(
+    anime: str,
+    episode: int,
+    output: str,
+    debug: bool = False,
+    trusted: bool = False,
+    number: int = 10,
+    sort_by: str = 'seeders',
+):
     """
     Search for Anime on https://nyaa.si and downloads it
 
@@ -65,7 +89,7 @@ def main(anime: str, episode: int, output: str, debug: bool = False, trusted: bo
         logger.setLevel(logging.DEBUG)
         ch.setLevel(logging.DEBUG)
 
-    torrent_search = search_torrent(anime, episode, number=number, trusted_only=trusted)
+    torrent_search = search_torrent(anime, episode, number=number, trusted_only=trusted, sort_by=sort_by)
 
     if torrent_search:
         torrent_path, result_name = torrent_search

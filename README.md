@@ -46,7 +46,9 @@ Usage: nyaa [OPTIONS] ANIME [EPISODE]
 Options:
   -o, --output PATH     Output Folder  [default: ~/Videos/Anime]
   -n, --number INTEGER  Number of entries  [default: 10]
-  --debug / --no-debug  Debug Mode
+  -s, --sort-by TEXT    Sort by  [default: seeders]
+  -t, --trusted         Only search trusted uploads
+  -d, --debug           Debug Mode
   --help                Show this message and exit.
 ```
 

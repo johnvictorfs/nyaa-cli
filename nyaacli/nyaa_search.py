@@ -63,7 +63,8 @@ def search_torrent(
     episode: Optional[int] = None,
     dub: bool = False,
     number: int = 10,
-    trusted_only: bool = False
+    trusted_only: bool = False,
+    sort_by: str = 'seeders'
 ) -> Optional[Tuple[str, str]]:
     """
     Results a tuple with (Path to .torrent file, Result name of video file)
@@ -80,12 +81,22 @@ def search_torrent(
     url_arguments: Dict[str, str] = {
         'c': '1_2',  # Language (English)
         'q': search_query,  # Search Query
-        's': 'seeders',  # Sort by seeders
-        'o': 'desc',  # Sort order
     }
 
     if trusted_only:
         url_arguments['f'] = '2'  # Trusted uploaders only
+
+    # What to sort torrents by
+    if sort_by == 'seeders':
+        url_arguments['s'] = 'seeders'
+    elif sort_by == 'date':
+        url_arguments['s'] = 'id'
+    elif sort_by == 'size':
+        url_arguments['s'] = 'size'
+    elif sort_by == 'comments':
+        url_arguments['s'] = 'comments'
+
+    logger.debug(f'URL Arguments: {url_arguments}')
 
     search_url = 'https://nyaa.si/rss?' + parse.urlencode(url_arguments)
 
