@@ -55,7 +55,7 @@ class Entry:
     date: datetime
 
     def __str__(self):
-        return f'Entry(title={repr(self.title)}, episode={repr(self.episode)})'
+        return f'Entry(title={repr(self.title)}, episode={repr(self.episode)}, screen_size={repr(self.screen_size)})'
 
 
 def search_torrent(
@@ -207,7 +207,9 @@ def search_torrent(
         # Cancelled with Ctrl + C
         sys.exit(0)
 
-    index_choice = answer['selection'] - 1
+    logger.debug(f'Selection: [{answer["selection"]}]')
+
+    index_choice = answer['selection']
 
     entry_choice = entries[index_choice]
 
@@ -216,7 +218,7 @@ def search_torrent(
     final_path = entry_choice.full_title
 
     torrent_path = f'/tmp/{final_path}.torrent'
-    logger.debug(f'Downloading torrent file to \'{torrent_path}\'')
+    logger.debug(f'Downloading torrent file to \'{torrent_path}\' from \'{entry_choice.link}\'')
 
     print(f"{green('[Downloading Torrent File]')} '{torrent_path}'")
 

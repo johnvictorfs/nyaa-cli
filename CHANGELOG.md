@@ -2,6 +2,12 @@
 
 ---
 
+## 0.2.1
+
+- Fixed issue where torrent selection was actually in some cases selecting the torrent above the one selected
+
+---
+
 ## 0.2.0
 
 - Only show torrent alert messages in debug mode (`--debug`) (Closes Issue [`#25`](https://github.com/johnvictorfs/nyaa-cli/issues/25))
