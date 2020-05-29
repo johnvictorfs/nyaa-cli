@@ -2,6 +2,12 @@
 
 ---
 
+## 0.2.2
+
+- Fix issue with not being able to correctly get resolution from torrent entry title
+
+---
+
 ## 0.2.1
 
 - Fixed issue where torrent selection was actually in some cases selecting the torrent above the one selected

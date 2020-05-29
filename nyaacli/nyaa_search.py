@@ -12,6 +12,7 @@ import feedparser
 import logging
 import sys
 import os
+import re
 
 os.environ['REGEX_DISABLED'] = '1'
 
@@ -110,41 +111,69 @@ def search_torrent(
 
     entries: List[Entry] = []
 
+    # Find resolution in string regex
+    screen_size_pattern = re.compile(r'^([0-9]+)|.?([0-9]{4})p')
+
     for entry in feed.entries:
         title = guessit(entry['title'])
 
-        if not title.get('screen_size'):
-            # Ignore entries without Screen size property
-            continue
+        if episode:
+            if title.get('type') != 'episode':
+                logger.debug(f"Skipping (Not episode, but searching for E{episode}) {entry}")
+                continue
+
+            if title.get('episode') != episode:
+                logger.debug(f"Skipping (Wrong episode, searching for E{episode}) {entry}")
+                continue
 
         if not dub and 'dub' in entry['title'].lower():
             # Ignore entries with 'dub' in their titles if dub=False
+            logger.debug(f"Skipping (Dub) {entry}")
             continue
 
-        # Screen size needs to be higher than 480p
-        good_size = int(title.get('screen_size').replace('p', '')) > 480
+        size = 0
 
-        if (title.get('episode') == episode or not episode) and title.get('type') == 'episode' and good_size:
-            entry = Entry(
-                link=entry['link'],
-                size=entry['nyaa_size'],
-                original_title=entry['title'],
-                display_title=entry['title'],
-                extension=get_file_extension(entry['title']),
-                title=title.get('title'),
-                season=title.get('season'),
-                seeders=entry.get('nyaa_seeders'),
-                full_title='',
-                episode=title.get('episode'),
-                episode_title=title.get('episode_title'),
-                other=title.get('other'),
-                release_group=title.get('release_group'),
-                screen_size=title.get('screen_size'),
-                alternative_title=title.get('alternative_title'),
-                date=datetime.fromtimestamp(mktime(entry.get('published_parsed')))
-            )
-            logger.debug(f'Added entry: {entry}')
-            entries.append(entry)
+        # Screen size needs to be higher than 480p
+        if title.get('screen_size'):
+            sizes = re.search(screen_size_pattern, title.get('screen_size'))
+        else:
+            sizes = re.search(screen_size_pattern, entry['title'])
+
+        if sizes:
+            for group in sizes.groups():
+                if group:
+                    size = int(group)
+
+        good_size = size > 480
+
+        if not title.get('screen_size'):
+            # Add screen size to title properties if not already there
+            title['screen_size'] = f'{size}p'
+
+        if not good_size:
+            logger.debug(f"Skipping (bad size ({size})) {entry}")
+            continue
+
+        entry = Entry(
+            link=entry['link'],
+            size=entry['nyaa_size'],
+            original_title=entry['title'],
+            display_title=entry['title'],
+            extension=get_file_extension(entry['title']),
+            title=title.get('title'),
+            season=title.get('season'),
+            seeders=entry.get('nyaa_seeders'),
+            full_title='',
+            episode=title.get('episode'),
+            episode_title=title.get('episode_title'),
+            other=title.get('other'),
+            release_group=title.get('release_group'),
+            screen_size=title.get('screen_size'),
+            alternative_title=title.get('alternative_title'),
+            date=datetime.fromtimestamp(mktime(entry.get('published_parsed')))
+        )
+        logger.debug(f'Added entry: {entry}')
+        entries.append(entry)
 
     if not entries:
         print(red(f'No results found for search: \'{search_query.replace("%20", " ")}\''))
