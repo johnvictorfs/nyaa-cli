@@ -12,10 +12,7 @@ from time import mktime
 import feedparser
 import logging
 import sys
-import os
 import re
-
-os.environ['REGEX_DISABLED'] = '1'
 
 logger = logging.getLogger('nyaa')
 

@@ -59,8 +59,9 @@ def main(
     anime: str,
     episode: int,
     output: str,
-    debug: bool = False,
     trusted: bool = False,
+    debug: bool = False,
+    anilist: bool = False,
     number: int = 10,
     sort_by: str = 'seeders',
 ):
