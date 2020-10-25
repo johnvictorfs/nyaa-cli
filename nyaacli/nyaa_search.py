@@ -2,6 +2,7 @@ from questionary import prompt
 from guessit import guessit
 
 from nyaacli.colors import red, green, prompt_style
+from nyaacli.utils import get_file_extension
 
 from urllib import parse, request
 from typing import Optional, List, Tuple, Dict
@@ -17,23 +18,6 @@ import re
 os.environ['REGEX_DISABLED'] = '1'
 
 logger = logging.getLogger('nyaa')
-
-
-def get_file_extension(path: str) -> str:
-    """
-    Gets the File extension from the path to a file
-
-    'asd.txt' -> '.txt'
-    'asd' -> ''
-    '/path/to/asd.mkv' -> '.mkv'
-    """
-    filename, extension = os.path.splitext(path)
-
-    return extension
-
-
-def text_break() -> None:
-    print('-' * 10, end='\n')
 
 
 @dataclass

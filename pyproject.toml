@@ -24,6 +24,7 @@ click = "~7.0"
 colorama = "~0.4.1"
 dataclasses = { version = "~0.7", python = "~3.6" }
 questionary = "~1.5.1"
+requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.4"

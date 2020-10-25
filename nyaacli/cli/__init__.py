@@ -54,6 +54,7 @@ def sort_mode_autocomplete(ctx, args: List[str], incomplete: str):
 @click.option('--sort-by', '-s', default='seeders', help=green('Sort by'), show_default=True, autocompletion=sort_mode_autocomplete)
 @click.option('--trusted', '-t', default=False, help=green('Only search trusted uploads'), is_flag=True)
 @click.option('--debug', '-d', default=False, help=green('Debug Mode'), is_flag=True)
+@click.option('--anilist', '-a', default=False, help=green('Anilist Integration'), is_flag=True)
 def main(
     anime: str,
     episode: int,
