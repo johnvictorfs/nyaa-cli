@@ -3,7 +3,7 @@
 
 A CLI for downloading Anime from https://nyaa.si making use of their RSS Feed and [python-libtorrent](https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst)
 
-**Warning:** Only tested on Linux, Windows or MacOS support is not guaranteed, feel free to open issues about it, but I don't have any non-Linux machines to test any problems related to other OSes.
+**Warning:** Only tested on Linux. Windows or MacOS support is not guaranteed, feel free to open issues about it, but I don't have any non-Linux machines to test any problems related to other OSes.
 
 [CHANGELOG](CHANGELOG.md)
 
