@@ -7,6 +7,7 @@ from typing import List
 from nyaacli.nyaa_search import search_torrent
 from nyaacli.colors import red, green
 from nyaacli.logger import CustomFormatter
+from nyaacli.utils import xdg_open
 
 import click
 from colorama import init
@@ -54,11 +55,13 @@ def sort_mode_autocomplete(ctx, args: List[str], incomplete: str):
 @click.option('--sort-by', '-s', default='seeders', help=green('Sort by'), show_default=True, autocompletion=sort_mode_autocomplete)
 @click.option('--trusted', '-t', default=False, help=green('Only search trusted uploads'), is_flag=True)
 @click.option('--debug', '-d', default=False, help=green('Debug Mode'), is_flag=True)
+@click.option('--client', '-c', default=False, help=green('Use Torrent Client'), is_flag=True)
 def main(
     anime: str,
     episode: int,
     output: str,
     debug: bool = False,
+    client: bool = False,
     trusted: bool = False,
     number: int = 10,
     sort_by: str = 'seeders',
@@ -94,7 +97,10 @@ def main(
     if torrent_search:
         torrent_path, result_name = torrent_search
 
-        download_torrent(torrent_path, result_name, base_path=output)
+        if client:
+            xdg_open(torrent_path)
+        else:
+            download_torrent(torrent_path, result_name, base_path=output)
 
 
 try:
