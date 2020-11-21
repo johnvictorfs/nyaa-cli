@@ -2,6 +2,12 @@
 
 ---
 
+## 0.2.3
+
+- Add `--client` / `-c` flag to open torrent file with default Torrent Client instead of using Libtorrent
+
+---
+
 ## 0.2.2
 
 - Fix issue with not being able to correctly get resolution from torrent entry title
