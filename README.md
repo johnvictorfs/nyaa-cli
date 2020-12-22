@@ -52,6 +52,7 @@ Options:
   -t, --trusted         Only search trusted uploads
   -d, --debug           Debug Mode
   -c, --client          Use Torrent Client
+  -p, --player          Open in Video Player after download
   --help                Show this message and exit.
 ```
 
