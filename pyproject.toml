@@ -17,13 +17,13 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = ">=3.6,<3.10"
 feedparser = "~5.2"
 guessit = "3.1.1"
 click = "~7.0"
 colorama = "~0.4.1"
 dataclasses = { version = "~0.7", python = "~3.6" }
-questionary = "~1.5.1"
+questionary = "1.9.0"
 rich = "^9.5.1"
 
 [tool.poetry.dev-dependencies]

@@ -32,11 +32,7 @@ def get_file_extension(path: str) -> str:
     filename, extension = os.path.splitext(path)
     logger.debug(f"[File Extension] Path: '{path}' -> ('{filename}' + '{extension}')")
 
-    return extension or '.mkv'
-
-
-def text_break() -> None:
-    print('-' * 10, end='\n')
+    return extension
 
 
 @dataclass

@@ -192,17 +192,17 @@ six = ">=1.5"
 
 [[package]]
 name = "questionary"
-version = "1.5.2"
+version = "1.9.0"
 description = "Python library to build pretty command line user prompts ⭐️"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6,<3.10"
 
 [package.extras]
-test = ["pytest", "pytest-pycodestyle", "pytest-cov", "coveralls"]
+docs = ["Sphinx (>=3.3,<4.0)", "sphinx-rtd-theme (>=0.5.0,<0.6.0)", "sphinx-autobuild (>=2020.9.1,<2021.0.0)", "sphinx-copybutton (>=0.3.1,<0.4.0)", "sphinx-autodoc-typehints (>=1.11.1,<2.0.0)"]
 
 [package.dependencies]
-prompt-toolkit = ">=2.0,<4.0"
+prompt_toolkit = ">=2.0,<4.0"
 
 [[package]]
 name = "rebulk"
@@ -288,8 +288,8 @@ testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
 lock-version = "1.0"
-python-versions = "^3.6"
-content-hash = "074aa7728315a67b1670c33ed657be6068250582731ca8e3170d30fb5dccbfcc"
+python-versions = ">=3.6,<3.10"
+content-hash = "e2ae271d3fc2228f5b1abad238aec1a32d2595595c0613c7a284dd57b78bbdfa"
 
 [metadata.files]
 autopep8 = [
@@ -375,8 +375,8 @@ python-dateutil = [
     {file = "python_dateutil-2.8.1-py2.py3-none-any.whl", hash = "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"},
 ]
 questionary = [
-    {file = "questionary-1.5.2-py3-none-any.whl", hash = "sha256:6998a1fe0639daec0da44e0a973f387e7c778bdc418d76ecfa45a7b3a0997049"},
-    {file = "questionary-1.5.2.tar.gz", hash = "sha256:f6e41e36b6c86fe0c3ff12a30c6c6a4e80129efba5ad0a115d71fd5df119c726"},
+    {file = "questionary-1.9.0-py3-none-any.whl", hash = "sha256:fa50c06af4e3826d986efbc90be16e42ff367a634e6a169e42a3f9fccd90648b"},
+    {file = "questionary-1.9.0.tar.gz", hash = "sha256:a050fdbb81406cddca679a6f492c6272da90cb09988963817828f697cf091c55"},
 ]
 rebulk = [
     {file = "rebulk-2.0.1.tar.gz", hash = "sha256:320ded3cc456347d828f95e9aa5f8bab77ac01943cad024c06012069fe19690a"},
