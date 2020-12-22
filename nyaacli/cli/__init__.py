@@ -4,9 +4,11 @@ import logging
 import sys
 from typing import List
 
+from rich import print
+from rich.logging import RichHandler
+
 from nyaacli.nyaa_search import search_torrent
-from nyaacli.colors import red, green
-from nyaacli.logger import CustomFormatter
+from nyaacli.colors import green
 from nyaacli.utils import xdg_open
 
 import click
@@ -80,17 +82,11 @@ def main(
     # Setup debugging
     logger = logging.getLogger("nyaa")
     logger.setLevel(logging.CRITICAL)
-
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.CRITICAL)
-    ch.setFormatter(CustomFormatter())
-
-    logger.addHandler(ch)
+    logger.addHandler(RichHandler())
 
     if debug:
         # Add debugging logging in debug mode
         logger.setLevel(logging.DEBUG)
-        ch.setLevel(logging.DEBUG)
 
     torrent_search = search_torrent(anime, episode, number=number, trusted_only=trusted, sort_by=sort_by)
 
@@ -106,14 +102,14 @@ def main(
 try:
     from nyaacli.torrenting import download_torrent
 except ModuleNotFoundError:
-    print(red("You need to have the 'libtorrent' library (with the Python API) installed to user nyaa-cli.\n"))
+    print("[bold red]You need to have the 'libtorrent' library (with the Python API) installed to user nyaa-cli.[/bold red]\n")
 
-    print('- Install with apt:', green('sudo apt install python3-libtorrent'))
-    print('- Install with pacman:', green('sudo pacman -S libtorrent-rasterbar'))
+    print('- Install with apt: [bold green]sudo apt install python3-libtorrent[/bold green]')
+    print('- Install with pacman: [bold green]sudo pacman -S libtorrent-rasterbar[/bold green]')
 
-    libtorrent_url = green("https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst")
+    libtorrent_url = "https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst"
 
-    print(f"\nOtherwise, look into how you can build it from source here: {libtorrent_url}")
+    print(f"\nOtherwise, look into how you can build it from source here: [bold green]{libtorrent_url}[/bold green]")
     sys.exit(1)
 
 main()
