@@ -6,6 +6,7 @@ from typing import List
 
 from rich import print
 from rich.logging import RichHandler
+from rich.traceback import install
 
 from nyaacli.nyaa_search import search_torrent
 from nyaacli.colors import green
@@ -15,6 +16,7 @@ import click
 from colorama import init
 
 init()
+install(show_locals=True)
 
 
 def entries_autocomplete(ctx, args: List[str], incomplete: str):
@@ -58,6 +60,7 @@ def sort_mode_autocomplete(ctx, args: List[str], incomplete: str):
 @click.option('--trusted', '-t', default=False, help=green('Only search trusted uploads'), is_flag=True)
 @click.option('--debug', '-d', default=False, help=green('Debug Mode'), is_flag=True)
 @click.option('--client', '-c', default=False, help=green('Use Torrent Client'), is_flag=True)
+@click.option('--player', '-p', default=False, help=green('Open in Video Player after download'), is_flag=True)
 def main(
     anime: str,
     episode: int,
@@ -65,6 +68,7 @@ def main(
     debug: bool = False,
     client: bool = False,
     trusted: bool = False,
+    player: bool = False,
     number: int = 10,
     sort_by: str = 'seeders',
 ):
@@ -88,6 +92,18 @@ def main(
         # Add debugging logging in debug mode
         logger.setLevel(logging.DEBUG)
 
+    if not client:
+        try:
+            from nyaacli.torrenting import download_torrent
+        except ModuleNotFoundError:
+            print("[bold red]You need to have the 'libtorrent' library (with the Python API) installed to user nyaa-cli.[/bold red]\n")
+
+            print('- Install with apt: [bold green]sudo apt install python3-libtorrent[/bold green]')
+            print('- Install with pacman: [bold green]sudo pacman -S libtorrent-rasterbar[/bold green]')
+
+            print('\nAlternatively pass the flag [bold green]--client[/bold green] to use your default torrenting client instead.')
+            sys.exit(1)
+
     torrent_search = search_torrent(anime, episode, number=number, trusted_only=trusted, sort_by=sort_by)
 
     if torrent_search:
@@ -96,20 +112,12 @@ def main(
         if client:
             xdg_open(torrent_path)
         else:
-            download_torrent(torrent_path, result_name, base_path=output)
+            output_path = download_torrent(torrent_path, result_name, base_path=output)
 
+            print(f'Finished download at: [green]\'{output_path}\'[/green] ')
 
-try:
-    from nyaacli.torrenting import download_torrent
-except ModuleNotFoundError:
-    print("[bold red]You need to have the 'libtorrent' library (with the Python API) installed to user nyaa-cli.[/bold red]\n")
+            if player:
+                xdg_open(output_path)
 
-    print('- Install with apt: [bold green]sudo apt install python3-libtorrent[/bold green]')
-    print('- Install with pacman: [bold green]sudo pacman -S libtorrent-rasterbar[/bold green]')
-
-    libtorrent_url = "https://github.com/arvidn/libtorrent/blob/RC_1_2/docs/python_binding.rst"
-
-    print(f"\nOtherwise, look into how you can build it from source here: [bold green]{libtorrent_url}[/bold green]")
-    sys.exit(1)
 
 main()

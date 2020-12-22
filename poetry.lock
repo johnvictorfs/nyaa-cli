@@ -80,7 +80,7 @@ python = "<3.8"
 
 [[package]]
 name = "guessit"
-version = "3.0.5"
+version = "3.1.1"
 description = "GuessIt - a library for guessing information from video filenames."
 category = "main"
 optional = false
@@ -93,7 +93,8 @@ test = ["pytest (>=3.3)", "pytest-benchmark", "pyyaml"]
 [package.dependencies]
 babelfish = "*"
 python-dateutil = "*"
-rebulk = "<2"
+rebulk = ">=2.0.0,<3.0.0"
+six = "*"
 
 [[package]]
 name = "importlib-metadata"
@@ -205,7 +206,7 @@ prompt-toolkit = ">=2.0,<4.0"
 
 [[package]]
 name = "rebulk"
-version = "1.0.1"
+version = "2.0.1"
 description = "Rebulk - Define simple search patterns in bulk to perform advanced matching on any string."
 category = "main"
 optional = false
@@ -288,7 +289,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.0"
 python-versions = "^3.6"
-content-hash = "7bd6e2316aada7a36076f6419c298de3171285bd420b4c73d0b155493541c037"
+content-hash = "074aa7728315a67b1670c33ed657be6068250582731ca8e3170d30fb5dccbfcc"
 
 [metadata.files]
 autopep8 = [
@@ -323,7 +324,7 @@ flake8 = [
     {file = "flake8-3.8.1.tar.gz", hash = "sha256:ea6623797bf9a52f4c9577d780da0bb17d65f870213f7b5bcc9fca82540c31d5"},
 ]
 guessit = [
-    {file = "guessit-3.0.5.tar.gz", hash = "sha256:3559c2f37575b048c3d8723cc7a8eedb83b6c411d1be0d64e8b54f4b90138ca2"},
+    {file = "guessit-3.1.1.tar.gz", hash = "sha256:71c68c6d4e9d639eba6534a838468115ad20f4c5a688eae3079f0c08d605a3b0"},
 ]
 importlib-metadata = [
     {file = "importlib_metadata-1.6.0-py2.py3-none-any.whl", hash = "sha256:2a688cbaa90e0cc587f1df48bdc97a6eadccdcd9c35fb3f976a09e3b5016d90f"},
@@ -378,7 +379,7 @@ questionary = [
     {file = "questionary-1.5.2.tar.gz", hash = "sha256:f6e41e36b6c86fe0c3ff12a30c6c6a4e80129efba5ad0a115d71fd5df119c726"},
 ]
 rebulk = [
-    {file = "rebulk-1.0.1.tar.gz", hash = "sha256:81142667c5626913392d81c199bfb2ca60a16d85c402c3e371f0f29dbc262684"},
+    {file = "rebulk-2.0.1.tar.gz", hash = "sha256:320ded3cc456347d828f95e9aa5f8bab77ac01943cad024c06012069fe19690a"},
 ]
 rich = [
     {file = "rich-9.5.1-py3-none-any.whl", hash = "sha256:0f4359df97670c1981599690458c4c9ede02c56f59ae3a648b7154cdba21b0cc"},
