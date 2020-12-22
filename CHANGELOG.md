@@ -2,6 +2,15 @@
 
 ---
 
+## 0.3.0
+
+- Add  `--player` / `-p` flag to open downloaded anime directly with your video player after download is finished
+- Add a progress bar when searching for anime
+- Update download progress bar to use [rich](https://github.com/willmcgugan/rich)'s progress bar, which breaks less often and is a lot fancier
+- Fix occasional crash when searching for Anime that didn't have some info in their nyaa.si titles
+
+---
+
 ## 0.2.3
 
 - Add `--client` / `-c` flag to open torrent file with default Torrent Client instead of using Libtorrent
