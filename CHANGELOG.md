@@ -2,6 +2,12 @@
 
 ---
 
+## 0.3.1
+
+- Add Python 3.9 support (Closes Issue [#33](https://github.com/johnvictorfs/nyaa-cli/issues/33))
+
+---
+
 ## 0.3.0
 
 - Add  `--player` / `-p` flag to open downloaded anime directly with your video player after download is finished
