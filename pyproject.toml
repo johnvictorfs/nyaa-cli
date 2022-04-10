@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nyaacli"
-version = "0.3.1"
+version = "0.3.2"
 description = "A CLI for downloading Anime from https://nyaa.si"
 authors = ["John Victor <johnvfs@protonmail.com>"]
 license = "MIT"
