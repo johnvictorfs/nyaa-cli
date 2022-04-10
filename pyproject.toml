@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nyaacli"
-version = "0.3.1"
+version = "0.3.2"
 description = "A CLI for downloading Anime from https://nyaa.si"
 authors = ["John Victor <johnvfs@protonmail.com>"]
 license = "MIT"
@@ -18,14 +18,14 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<3.10"
+python = ">=3.6.3,<4.0.0"
 feedparser = "6.0.2"
 guessit = "3.2.0"
 click = "7.1.2"
 colorama = "0.4.4"
 dataclasses = { version = "~0.8", python = "~3.6" }
-questionary = "1.9.0"
-rich = "~9.5.1"
+questionary = "1.10.0"
+rich = "~12.2.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.4"
