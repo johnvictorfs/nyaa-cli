@@ -2,7 +2,6 @@
 
 import logging
 import sys
-from typing import List
 
 from rich import print
 from rich.logging import RichHandler
@@ -19,7 +18,7 @@ init()
 install(show_locals=True)
 
 
-def entries_autocomplete(ctx, args: List[str], incomplete: str):
+def entries_autocomplete(ctx, param, incomplete):
     """
     Auto-complete choices for --number / -n argument
     """
@@ -33,10 +32,13 @@ def entries_autocomplete(ctx, args: List[str], incomplete: str):
         ('20', f'20 {text}')
     ]
 
-    return [c for c in entries if incomplete in c[0]]
+    return [
+        click.shell_completion.CompletionItem(v, help=h)
+        for v, h in entries if incomplete in v
+    ]
 
 
-def sort_mode_autocomplete(ctx, args: List[str], incomplete: str):
+def sort_mode_autocomplete(ctx, param, incomplete):
     """
     Auto-complete choices for --sort-by / -s argument
     """
@@ -48,15 +50,18 @@ def sort_mode_autocomplete(ctx, args: List[str], incomplete: str):
         ('comments', 'Sort by number of comments')
     ]
 
-    return [c for c in entries if incomplete in c[0]]
+    return [
+        click.shell_completion.CompletionItem(v, help=h)
+        for v, h in entries if incomplete in v
+    ]
 
 
 @click.command()
 @click.argument('anime')
 @click.argument('episode', type=int, default=None, required=False)
 @click.option('--output', '-o', default='~/Videos/Anime', help=green('Output Folder'), type=click.Path(), show_default=True)
-@click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True, autocompletion=entries_autocomplete)
-@click.option('--sort-by', '-s', default='seeders', help=green('Sort by'), show_default=True, autocompletion=sort_mode_autocomplete)
+@click.option('--number', '-n', default=10, help=green('Number of entries'), show_default=True, shell_complete=entries_autocomplete)
+@click.option('--sort-by', '-s', default='seeders', help=green('Sort by'), show_default=True, shell_complete=sort_mode_autocomplete)
 @click.option('--trusted', '-t', default=False, help=green('Only search trusted uploads'), is_flag=True)
 @click.option('--debug', '-d', default=False, help=green('Debug Mode'), is_flag=True)
 @click.option('--client', '-c', default=False, help=green('Use Torrent Client'), is_flag=True)
@@ -96,7 +101,7 @@ def main(
         try:
             from nyaacli.torrenting import download_torrent
         except ModuleNotFoundError:
-            print("[bold red]You need to have the 'libtorrent' library (with the Python API) installed to user nyaa-cli.[/bold red]\n")
+            print("[bold red]You need to have the 'libtorrent' library (with the Python API) installed to use nyaa-cli.[/bold red]\n")
 
             print('- Install with apt: [bold green]sudo apt install python3-libtorrent[/bold green]')
             print('- Install with pacman: [bold green]sudo pacman -S libtorrent-rasterbar[/bold green]')
