@@ -154,16 +154,17 @@ wheels = [
 
 [[package]]
 name = "guessit"
-version = "3.2.0"
+version = "3.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babelfish" },
+    { name = "importlib-resources", marker = "python_full_version < '3.9'" },
     { name = "python-dateutil" },
     { name = "rebulk" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b7/a7/bdfff81ecf8f87ddc1510bb1aa2b7367404df072d6ff951c5604d1baa4e1/guessit-3.2.0.tar.gz", hash = "sha256:d74424e28196e20ac492c86d60b1784c32b39804d909ac6c204bfa53c2a7dfcb", size = 147286, upload-time = "2020-12-23T23:08:49.532Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d0/07/5a88020bfe2591af2ffc75841200b2c17ff52510779510346af5477e64cd/guessit-3.8.0.tar.gz", hash = "sha256:6619fcbbf9a0510ec8c2c33744c4251cad0507b1d573d05c875de17edc5edbed", size = 271285, upload-time = "2023-12-14T10:24:20.582Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/35/e0/a4bc7229d6cddc16587a99ae1e39a4fde0038c8f5f05fe4585277d4e1496/guessit-3.2.0-py3-none-any.whl", hash = "sha256:f1b2c2b7fbf0b23dd6c61d03221370992944459431c46ba71ddcbade77796d14", size = 160972, upload-time = "2020-12-23T23:08:47.923Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/9b/924a8f9709c3143d4c9a301a88042cbce37e09789378217284b19d4f8132/guessit-3.8.0-py3-none-any.whl", hash = "sha256:eb5747b1d0fbca926562c1e5894dbc3f6507c35e8c0bd9e38148401cd9579d83", size = 206049, upload-time = "2023-12-14T10:24:17.753Z" },
 ]
 
 [[package]]
@@ -172,7 +173,7 @@ version = "4.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "zipp", version = "3.20.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
-    { name = "zipp", version = "3.23.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
+    { name = "zipp", version = "3.23.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/55/12/ab288357b884ebc807e3f4eff63ce5ba6b941ba61499071bf19f1bbc7f7f/importlib_metadata-4.13.0.tar.gz", hash = "sha256:dd0173e8f150d6815e098fd354f6414b0f079af4644ddfe90c71e2fc6174346d", size = 50445, upload-time = "2022-10-01T17:09:15.698Z" }
 wheels = [
@@ -487,7 +488,7 @@ requires-dist = [
     { name = "click", specifier = "==7.1.2" },
     { name = "colorama", specifier = "==0.4.4" },
     { name = "feedparser", specifier = "==6.0.2" },
-    { name = "guessit", specifier = "==3.2.0" },
+    { name = "guessit", specifier = ">=3.8" },
     { name = "questionary", specifier = "==1.10.0" },
     { name = "rich", specifier = ">=12.2.0" },
 ]

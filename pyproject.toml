@@ -22,7 +22,7 @@ classifiers = [
 
 dependencies = [
     "feedparser==6.0.2",
-    "guessit==3.2.0",
+    "guessit>=3.8",
     "click==7.1.2",
     "colorama==0.4.4",
     "questionary==1.10.0",
