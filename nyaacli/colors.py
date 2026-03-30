@@ -20,15 +20,17 @@ def blue(text: str) -> str:
     return Fore.BLUE + text + Style.RESET_ALL
 
 
-prompt_style = styles.Style([
-    ('qmark', 'fg:#5F819D bold'),
-    ('question', 'fg:#289c64 bold'),
-    ('answer', 'fg:#48b5b5 bold'),
-    ('pointer', 'fg:#48b5b5 bold'),
-    ('highlighted', 'fg:#07d1e8'),
-    ('selected', 'fg:#48b5b5 bold'),
-    ('separator', 'fg:#6C6C6C'),
-    ('instruction', 'fg:#77a371'),
-    ('text', ''),
-    ('disabled', 'fg:#858585 italic')
-])
+prompt_style = styles.Style(
+    [
+        ("qmark", "fg:#5F819D bold"),
+        ("question", "fg:#289c64 bold"),
+        ("answer", "fg:#48b5b5 bold"),
+        ("pointer", "fg:#48b5b5 bold"),
+        ("highlighted", "fg:#07d1e8"),
+        ("selected", "fg:#48b5b5 bold"),
+        ("separator", "fg:#6C6C6C"),
+        ("instruction", "fg:#77a371"),
+        ("text", ""),
+        ("disabled", "fg:#858585 italic"),
+    ]
+)
