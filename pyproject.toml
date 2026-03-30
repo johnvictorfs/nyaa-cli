@@ -38,9 +38,8 @@ nyaa = "nyaacli.cli:main"
 
 [dependency-groups]
 dev = [
-    "autopep8>=1.4",
-    "mypy>=0.740",
-    "flake8>=3.7",
+    "mypy>=1.0",
+    "ruff>=0.1",
 ]
 
 [build-system]
